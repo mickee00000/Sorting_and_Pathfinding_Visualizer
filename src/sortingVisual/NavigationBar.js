@@ -10,9 +10,6 @@ function NavigationBar() {
           <button className='buttons'>Shortest Path</button>
         </li>
         <li className='items'>
-          <button onClick={createRandomArray} className='buttons'>Change Array</button>
-          </li>
-        <li className='items'>
           <button className='buttons'>Change Size</button>
         </li>
         <li className='items'>
