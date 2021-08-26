@@ -19,7 +19,7 @@ export default class SortingVisualizer extends React.Component{
     componentDidMount(){ // This method is called during the mounting phase i.e after the components are rendered.
         this.resetArray(); // Everytime we reload, we get a new Array
     }
-
+    
     render() {
         const {unsortedArray} = this.state;
         return (
@@ -33,6 +33,4 @@ export default class SortingVisualizer extends React.Component{
             </div>
         );
     }
-
-   
 }
