@@ -9,7 +9,11 @@ const copyArray = () => {
   for(idx in array){
     arr.push(array[idx]);
     let array_bar = document.getElementById(`div-${idx}`);
-    array_bars.push(array_bar);
+    console.log('chane color');
+    array_bar.classList.remove('sorted-bar', 'unsorted-bar', 'swap-bar', 'chosen-bar');
+    array_bar.classList.add('array-bar');
+    array_bars[idx] = array_bar;
+    // array_bars.push(array_bar);
   }
   console.log(arr);
   return arr;
@@ -17,6 +21,7 @@ const copyArray = () => {
 
 // generates new random array
 const genrateRandomArray = () => {
+  array = [];
   let unsortedArray = [];
     for (let i = 0; i < 10; i++) {
       unsortedArray.push(Math.floor(Math.random() * 300 + 1));
