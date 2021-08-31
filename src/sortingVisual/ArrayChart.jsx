@@ -11,11 +11,6 @@ export default class SortingVisualizer extends React.Component {
 
   resetArray() {
     const array = genrateRandomArray();
-    // for (let i = 0; i < 20; i++) {
-    //   // Literally iterate through 100 random values and store them in the array intialized in the array.
-    //   unsortedArray.push(Math.floor(Math.random() * (300 + 1)));
-    // }
-
     this.setState({ array });
   }
 
@@ -38,9 +33,14 @@ export default class SortingVisualizer extends React.Component {
             ></div>
           ))}
         </div>
-        <button class="try" onClick={() => this.resetArray()}>
-          Generate New Array
-        </button>
+        <div className="array-controller">
+          <button className="try" onClick={() => this.resetArray()}>
+            Generate New Array
+          </button>
+          <button>Change Size</button>
+          <button>Change Speed</button>
+          <button>Old Array</button>
+        </div>
       </>
     );
   }
