@@ -10,7 +10,7 @@ export default class SortingVisualizer extends React.Component{
     resetArray() {
         const unsortedArray = []; 
         for (let i = 0; i < 60; i++){ // Literally iterate through 100 random values and store them in the array intialized in the array.
-            unsortedArray.push(Math.floor(Math.random()*(650  + 1) + 60));
+            unsortedArray.push(Math.floor(Math.random()*(600  + 1) + 60));
         }
         this.setState({unsortedArray})
     }
