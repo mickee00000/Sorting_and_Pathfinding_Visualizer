@@ -9,8 +9,8 @@ export default class SortingVisualizer extends React.Component{
 
     resetArray() {
         const unsortedArray = []; 
-        for (let i = 0; i < 60; i++){ // Literally iterate through 100 random values and store them in the array intialized in the array.
-            unsortedArray.push(Math.floor(Math.random()*(600  + 1) + 60));
+        for (let i = 0; i < 60; i++) { // Literally iterate through 100 random values and store them in the array initialized in the array.
+            unsortedArray.push(Math.floor(Math.random() * (600 + 1) + 60));
         }
         this.setState({unsortedArray})
     }
@@ -25,7 +25,7 @@ export default class SortingVisualizer extends React.Component{
             <div className="array-box">
             {
                 unsortedArray.map(
-                    (value, idx) => (<div className="array-bar" key = {idx} style={{height: `${value}px`}}></div>)
+                    (value, idx) => (<div className="array-bar" key={idx} style={{height: `${value}px`}}/>)
                 )
             }
             <button onClick={() => this.resetArray()}>Generate New Array</button>
