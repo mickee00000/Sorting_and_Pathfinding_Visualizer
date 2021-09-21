@@ -1,56 +1,6 @@
-.array-box{
-    position: absolute;
-    left: 40px;
-    justify-items: center;
-}
-
 .array-bar{
-    width: 20px;
-    background-color: rgb(50, 255, 4);
+    width:40px;
+    margin: 5px;
+    background-color: red;
     display: inline-block;
-    margin: 0 2px;
-}
-
-/*
-=======================
-Global Styles - NavBar ya boi git hub check kar rha tha bas..
-=======================
-*/
-*,
-::after,
-::before {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-nav {
-  background: #426b3d;
-  /*box-shadow: var(--light-shadow);*/
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 0;
-}
-
-ul {
-  display: flex;
-}
-ul li {
-  color: white;
-  list-style: none;
-  font-size: 1.1rem;
-  margin: auto;
-}
-
-ul li button {
-    background: transparent;
-    box-shadow: 0 0 0 transparent;
-    border: 0 solid transparent;
-    color: white;
-    font-size: 1.1rem;
-}
-
-.buttons :hover {
-  color: #4287f5;
 }
