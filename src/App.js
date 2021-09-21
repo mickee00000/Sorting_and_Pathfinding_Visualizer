@@ -1,15 +1,13 @@
+import SortingVisualizer from "./sortingVisual/sortViz";
 import './App.css';
-import SortingVisualizer from './sortingVisual/sortViz';
-import NavigationBar from './sortingVisual/NavigationBar';
-
 
 function App() {
-  return (
-    <div className="App">
-        <SortingVisualizer/>
-        <NavigationBar/>
-    </div>
+  return(
+      <div>
+          <SortingVisualizer/>
+      </div>
   );
+
 }
 
 export default App;
