@@ -1,6 +1,14 @@
-.array-bar{
-    width:40px;
+.array-bar {
+    width: 40px;
     margin: 5px;
     background-color: red;
     display: inline-block;
+}
+
+.multiBtn {
+    margin-left: 2px;
+}
+
+#firstBtn {
+    margin-left: 100px;
 }
