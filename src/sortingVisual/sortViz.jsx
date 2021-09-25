@@ -56,14 +56,6 @@ export default class SortingVisualizer extends React.Component{
     }
 
     Merge() {
-        this.setState({
-            swappings: 0,
-            comparisons: 0,
-        });
-
-        let arr = this.state.array;
-
-        let arrayBars = document.getElementsByClassName('array-bar');
 
         function mergeSort(array) {
             console.log("Splitting: ", array)
@@ -104,13 +96,20 @@ export default class SortingVisualizer extends React.Component{
 
         }
 
+        this.setState({
+            swappings: 0,
+            comparisons: 0,
+        });
+
+        let arr = this.state.array;
+        let arrayBars = document.getElementsByClassName('array-bar');
+
         mergeSort(arr);
 
     }
 
 
     Bubble() {
-
         this.setState({
             swappings: 0,
             comparisons: 0,
@@ -118,23 +117,8 @@ export default class SortingVisualizer extends React.Component{
             dummyArray: this.state.array,
             steps: [this.state.array],
         });
-        let dummy = this.state.dummyArray;
-        let steper = this.state.steps;
-        for (let i = 0; i < dummy.length - 1; i++) {
-            for (let j = 0; j < dummy.length - 1 - i; j++) {
-                if (dummy[j] > dummy[j + 1]) {
-                    temp = dummy[j];
-                    dummy[j] = dummy[j + 1];
-                    dummy[j + 1] = temp;
-                    /*this.setState({array: arr, swappings: this.state.swappings + 1});*/
-                }
-                steper.push(dummy)
-                this.setState({
-                    currentStep: this.state.currentStep + 1,
-                    steps: steper
-                })
-            }
-        }
+
+
         let temp = 0;
         let a = 0;
         let arr = this.state.array.slice();
@@ -177,6 +161,7 @@ export default class SortingVisualizer extends React.Component{
                 }
             }
         }
+
     }
 
     playPause() {
@@ -201,6 +186,7 @@ export default class SortingVisualizer extends React.Component{
                 <button className='multiBtn' id='firstBtn'>(Previous)</button>
                 <button className='multiBtn' onClick={() => this.playPause()}>PLaY / PAuSe</button>
                 <button className='multiBtn'>(Next)</button>
+
                 {/*<button onClick={() => this.checker()}*/}
                 <h1>Comparisons: {this.state.comparisons}   </h1>
                 <h1>Swapping: {this.state.swappings}</h1>
