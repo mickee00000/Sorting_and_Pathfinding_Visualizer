@@ -12,12 +12,12 @@ export default class SortingVisualizer extends React.Component{
             steps: [],
             currentStep: 0,
 
-            count: 10,
-            delay: 10,
+            count: 5,
+            delay: 1000,
 
             pp: true,
             comparisons: 0,
-            swappings: 0,
+            swapping: 0,
             description: ''
         };
     }
@@ -34,9 +34,14 @@ export default class SortingVisualizer extends React.Component{
     */
 
     resetArray() {
+        clearInterval(this.animeTimeout);
         let array = [];
         for (let i = 0; i < this.state.count; i++) {
             array.push(Math.floor(Math.random() * (200 - 50) + 5));
+        }
+        let arrayBars1 = document.getElementsByClassName('array-bar');
+        for (let m = 0; m < arrayBars1.length; m++) {
+            arrayBars1[m].style.backgroundColor = 'red';
         }
 
 
@@ -44,7 +49,7 @@ export default class SortingVisualizer extends React.Component{
             array: array,
             steps: [array],
             currentStep: 0,
-            swappings: 0,
+            swapping: 0,
             comparisons: 0,
         });
         let arrayBars = document.getElementsByClassName('array-bar');
@@ -97,7 +102,7 @@ export default class SortingVisualizer extends React.Component{
         }
 
         this.setState({
-            swappings: 0,
+            swapping: 0,
             comparisons: 0,
         });
 
@@ -111,7 +116,7 @@ export default class SortingVisualizer extends React.Component{
 
     Bubble() {
         this.setState({
-            swappings: 0,
+            swapping: 0,
             comparisons: 0,
             currentStep: 0,
             dummyArray: this.state.array,
@@ -121,46 +126,38 @@ export default class SortingVisualizer extends React.Component{
 
         let temp = 0;
         let a = 0;
-        let arr = this.state.array.slice();
-        let arrayBars = document.getElementsByClassName('array-bar');
+        const arr = this.state.array.slice();
+        const arraySet = [];
+        arraySet.push(arr);
+        /*let arrayBars = document.getElementsByClassName('array-bar');
         arrayBars[0].style.backgroundColor = 'yellow';
         arrayBars[1].style.backgroundColor = 'orange';
-
+       */
         for (let i = 0; i < arr.length - 1; i++) {
             for (let j = 0; j < arr.length - 1 - i; j++) {
-                if (this.state.pp) {
-                    a = a + 1;
-                    setTimeout(() => {
-                        for (let m = 0; m < arrayBars.length; m++) {
-                            arrayBars[m].style.backgroundColor = 'red';
-                        }
-                        if (j < arr.length - 1 - i) {
-                            arrayBars[j + 1].style.backgroundColor = 'yellow';
-                        }
-                        if (j < arr.length - 1 - i - 1) {
-                            arrayBars[j + 2].style.backgroundColor = 'orange';
-                        }
-                        this.setState({comparisons: this.state.comparisons + 1})
+                a = a + 1;
+                if (arr[j] > arr[j + 1]) {
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                    /*this.setState({array: arr, swapping: this.state.swapping + 1});*/
 
-                        if (arr[j] > arr[j + 1]) {
-                            temp = arr[j];
-                            arr[j] = arr[j + 1];
-                            arr[j + 1] = temp;
-                            this.setState({array: arr, swappings: this.state.swappings + 1});
-
-                        }
-                        for (let n = arrayBars.length - 1; n > arrayBars.length - i - 1; n--) {
-                            arrayBars[n].style.backgroundColor = 'green';
-                        }
-                        if (i === arrayBars.length - 2 && j === 0) {
-                            arrayBars[0].style.backgroundColor = 'green';
-                            arrayBars[1].style.backgroundColor = 'green';
-                        }
-                    }, this.state.delay * a);
-                    /*arrayBars[j+1].style.backgroundColor = 'cyan';*/
                 }
+                arraySet.push(arr);
             }
         }
+        a = 0
+
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = 0; j < arr.length - 1 - j; j++) {
+                a++;
+                setTimeout(() => {
+
+                    this.setState({array: arraySet[a]});
+                }, a * this.state.delay);
+            }
+        }
+
 
     }
 
@@ -189,7 +186,7 @@ export default class SortingVisualizer extends React.Component{
 
                 {/*<button onClick={() => this.checker()}*/}
                 <h1>Comparisons: {this.state.comparisons}   </h1>
-                <h1>Swapping: {this.state.swappings}</h1>
+                <h1>Swapping: {this.state.swapping}</h1>
 
             </div>
         );
@@ -197,8 +194,7 @@ export default class SortingVisualizer extends React.Component{
 }
 
 
-
-{/*
+/*
 <br/>
 <button onClick={() => this.playPause()}>Pause / Play</button>
 
@@ -213,4 +209,27 @@ playPause(){
 
 if (this.state.pp) {
 }
-*/}
+*/
+
+/*
+        for (let i =0; i < dummyArray.length - 1; i++){
+            for (let j=0; j < dummyArray.length - 1 -i; j++){
+                if (dummyArray[j] > dummyArray[j+1]){
+                    temp = dummyArray[j];
+                    dummyArray[j] = dummyArray[j + 1];
+                    dummyArray[j + 1] = temp;
+                }
+                arraySet.push(dummyArray);
+                a++;
+            }
+        }
+        this.setState({steps: arraySet});
+        console.log(this.state.steps);
+
+        let m = 1;
+        while (m < this.state.steps.length) {
+            m = m+1;
+            setTimeout(() => {
+                this.setState({array: this.state.steps[m]})
+            }, this.state.delay * m);
+        }*/
