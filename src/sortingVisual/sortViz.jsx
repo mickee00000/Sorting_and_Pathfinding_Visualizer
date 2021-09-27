@@ -12,13 +12,15 @@ export default class SortingVisualizer extends React.Component{
             steps: [],
             currentStep: 0,
 
-            count: 5,
-            delay: 1000,
+            count: 15,
+            delay: 5,
 
             pp: true,
             comparisons: 0,
             swapping: 0,
-            description: ''
+            description: '',
+
+            toggleState: true
         };
     }
 
@@ -51,6 +53,7 @@ export default class SortingVisualizer extends React.Component{
             currentStep: 0,
             swapping: 0,
             comparisons: 0,
+            toggleState: true
         });
         let arrayBars = document.getElementsByClassName('array-bar');
         for (let m = 0; m < arrayBars.length; m++) {
@@ -120,7 +123,8 @@ export default class SortingVisualizer extends React.Component{
             comparisons: 0,
             currentStep: 0,
             dummyArray: this.state.array,
-            steps: [this.state.array],
+            steps: [],
+            toggleState: false
         });
 
 
@@ -128,11 +132,12 @@ export default class SortingVisualizer extends React.Component{
         let a = 0;
         const arr = this.state.array.slice();
         const arraySet = [];
-        arraySet.push(arr);
-        /*let arrayBars = document.getElementsByClassName('array-bar');
-        arrayBars[0].style.backgroundColor = 'yellow';
-        arrayBars[1].style.backgroundColor = 'orange';
-       */
+        const colorCmp = []
+
+
+        let arrayBars = document.getElementsByClassName('array-bar');
+
+
         for (let i = 0; i < arr.length - 1; i++) {
             for (let j = 0; j < arr.length - 1 - i; j++) {
                 a = a + 1;
@@ -140,25 +145,48 @@ export default class SortingVisualizer extends React.Component{
                     temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
-                    /*this.setState({array: arr, swapping: this.state.swapping + 1});*/
-
+                    this.setState({swapping: this.state.swapping + 1});
                 }
-                arraySet.push(arr);
+                arraySet.push(arr.slice());
+                colorCmp.push([j, j + 1].slice());
             }
+            arraySet.push(arrayBars.length - 1 - i);
+            colorCmp.push([0].slice());
         }
+
         a = 0
+        let b = 0, greener = 0;
+        for (let i = 0; i < arraySet.length; i++) {
+            a++;
+            setTimeout(() => {
+                for (let m = 0; m < arrayBars.length - greener; m++) {
+                    arrayBars[m].style.backgroundColor = 'red';
+                }
+                const [fBar, sBar] = colorCmp[b];
+                if (colorCmp[b].length === 2) {
+                    arrayBars[fBar].style.backgroundColor = 'yellow';
+                    arrayBars[sBar].style.backgroundColor = 'yellow';
+                }
 
-        for (let i = 0; i < arr.length - 1; i++) {
-            for (let j = 0; j < arr.length - 1 - j; j++) {
-                a++;
-                setTimeout(() => {
+                if (arraySet[b].length === this.state.count) {
+                    this.setState({array: arraySet[b], comparisons: this.state.comparisons + 1});
+                } else {
+                    arrayBars[arraySet[b]].style.backgroundColor = 'green';
+                    greener++;
+                }
+                b++;
+                if (i === arraySet.length - 1) {
+                    arrayBars[0].style.backgroundColor = 'green';
+                }
 
-                    this.setState({array: arraySet[a]});
-                }, a * this.state.delay);
-            }
+
+                /*for(let n = arrayBars.length-1; n > arrayBars.length - 1 - i; n--){
+                    arrayBars[n].style.backgroundColor = 'green';
+                }*/
+            }, a * this.state.delay);
+
+
         }
-
-
     }
 
     playPause() {
@@ -180,9 +208,11 @@ export default class SortingVisualizer extends React.Component{
                 <button className='multiBtn' onClick={() => this.resetArray()}>Generate New Array</button>
                 <button className='multiBtn' onClick={() => this.Bubble()}>Bubble Sort</button>
                 <button className='multiBtn' onClick={() => this.Merge()}>Merge Sort</button>
-                <button className='multiBtn' id='firstBtn'>(Previous)</button>
-                <button className='multiBtn' onClick={() => this.playPause()}>PLaY / PAuSe</button>
-                <button className='multiBtn'>(Next)</button>
+                <button className='multiBtn' id='firstBtn' disabled={this.state.toggleState}>(Previous)</button>
+                <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.toggleState}>PLaY /
+                    PAuSe
+                </button>
+                <button className='multiBtn' disabled={this.state.toggleState}>(Next)</button>
 
                 {/*<button onClick={() => this.checker()}*/}
                 <h1>Comparisons: {this.state.comparisons}   </h1>
@@ -193,43 +223,3 @@ export default class SortingVisualizer extends React.Component{
     }
 }
 
-
-/*
-<br/>
-<button onClick={() => this.playPause()}>Pause / Play</button>
-
-playPause(){
-        if (this.state.pp) {
-            this.setState({pp: false});
-        }
-        else{
-            this.setState({pp:true})
-        }
-    }
-
-if (this.state.pp) {
-}
-*/
-
-/*
-        for (let i =0; i < dummyArray.length - 1; i++){
-            for (let j=0; j < dummyArray.length - 1 -i; j++){
-                if (dummyArray[j] > dummyArray[j+1]){
-                    temp = dummyArray[j];
-                    dummyArray[j] = dummyArray[j + 1];
-                    dummyArray[j + 1] = temp;
-                }
-                arraySet.push(dummyArray);
-                a++;
-            }
-        }
-        this.setState({steps: arraySet});
-        console.log(this.state.steps);
-
-        let m = 1;
-        while (m < this.state.steps.length) {
-            m = m+1;
-            setTimeout(() => {
-                this.setState({array: this.state.steps[m]})
-            }, this.state.delay * m);
-        }*/
