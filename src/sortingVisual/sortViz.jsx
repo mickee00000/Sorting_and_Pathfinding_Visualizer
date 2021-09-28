@@ -158,6 +158,8 @@ export default class SortingVisualizer extends React.Component{
 
             toggleSliderCount: true,
             toggleSliderDelay: true,
+
+            /* firstPrev: true*/
         });
 
         let temp = 0;
@@ -187,58 +189,13 @@ export default class SortingVisualizer extends React.Component{
         })
 
         this.state.animeInterval = setInterval(() => {
-            for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
-                arrayBars[m].style.backgroundColor = 'red';
-            }
-            const [fBar, sBar] = this.state.colorCmp[this.state.currentStep];
-            if (this.state.colorCmp[this.state.currentStep].length === 2) {
-                arrayBars[fBar].style.backgroundColor = 'yellow';
-                arrayBars[sBar].style.backgroundColor = 'yellow';
-            }
-
-            if (this.state.arraySet[this.state.currentStep].length === this.state.count) {
-                this.setState({
-                    array: this.state.arraySet[this.state.currentStep],
-                    comparisons: this.state.comparisons + 1
-                });
-            } else {
-                arrayBars[this.state.arraySet[this.state.currentStep]].style.backgroundColor = 'green';
-                this.setState({greener: this.state.greener + 1});
-            }
-            if (this.state.currentStep === this.state.arraySet.length - 1) {
-                arrayBars[0].style.backgroundColor = 'green';
-                this.setState({
-                    toggleNewArr: false,
-                    toggleSort: false,
-                    toggleNext: true,
-                    togglePP: true,
-                    togglePrev: false,
-                })
-                clearInterval(this.state.animeInterval);
-            }
+            this.BubbleColor();
             this.setState({currentStep: this.state.currentStep + 1})
         }, this.state.delay);
-
-
     }
 
-    Next() {
-        this.setState({
-
-            currentStep: this.state.currentStep + 1,
-
-            toggleSort: true,
-            toggleNewArr: false,
-            toggleNext: false,
-            togglePP: false,
-            togglePrev: true,
-
-            toggleSliderCount: true,
-            toggleSliderDelay: true,
-        });
-
+    BubbleColor() {
         let arrayBars = document.getElementsByClassName('array-bar');
-
         for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
             arrayBars[m].style.backgroundColor = 'red';
         }
@@ -266,9 +223,26 @@ export default class SortingVisualizer extends React.Component{
                 togglePP: true,
                 togglePrev: false,
             })
+            clearInterval(this.state.animeInterval);
         }
+    }
 
+    Next() {
+        this.setState({
 
+            currentStep: this.state.currentStep + 1,
+
+            toggleSort: true,
+            toggleNewArr: false,
+            toggleNext: false,
+            togglePP: false,
+            togglePrev: true,
+
+            toggleSliderCount: true,
+            toggleSliderDelay: true,
+        });
+
+        this.BubbleColor();
     }
 
     playPause() {
@@ -295,6 +269,23 @@ export default class SortingVisualizer extends React.Component{
     }
 
     Prev() {
+        if (this.state.currentStep === 0) {
+            this.setState({
+                togglePrev: false
+            })
+        } else {
+            /*if (this.state.firstPrev){
+                this.setState({
+                    currentStep: this.state.currentStep - 1,
+                    firstPrev: false
+                })
+
+            }*/
+            this.setState({
+                currentStep: this.state.currentStep - 1
+            })
+            this.BubbleColor()
+        }
 
     }
 
@@ -352,7 +343,9 @@ export default class SortingVisualizer extends React.Component{
                 </button>
                 <button className='multiBtn' onClick={() => this.Merge()} disabled={this.state.toggleSort}>Merge Sort
                 </button>
-                <button className='multiBtn' id='firstBtn' disabled={this.state.togglePrev}>(Previous)</button>
+                <button className='multiBtn' onClick={() => this.Prev()} id='firstBtn'
+                        disabled={this.state.togglePrev}>(Previous)
+                </button>
                 <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.togglePP}>PLaY /
                     PAuSe
                 </button>
