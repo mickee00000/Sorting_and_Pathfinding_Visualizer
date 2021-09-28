@@ -1,5 +1,6 @@
 import React from "react";
 import './sortViz.css';
+import {Slider} from "@material-ui/core";
 
 export default class SortingVisualizer extends React.Component{
     constructor(props) {
@@ -14,7 +15,7 @@ export default class SortingVisualizer extends React.Component{
             colorCmp: [],
 
             count: 15,
-            delay: 5,
+            delay: 100,
 
             comparisons: 0,
             swapping: 0,
@@ -25,7 +26,13 @@ export default class SortingVisualizer extends React.Component{
 
             toggleNext: true,
             togglePrev: true,
-            toggleState: false,
+            togglePP: true,
+            toggleSort: false,
+            toggleNewArr: false,
+
+            toggleSliderCount: false,
+            toggleSliderDelay: false,
+
         };
     }
 
@@ -41,7 +48,7 @@ export default class SortingVisualizer extends React.Component{
     */
 
     resetArray() {
-        clearInterval(this.animeTimeout);
+        clearInterval(this.state.animeInterval);
         let array = [];
         for (let i = 0; i < this.state.count; i++) {
             array.push(Math.floor(Math.random() * (200 - 50) + 5));
@@ -63,7 +70,14 @@ export default class SortingVisualizer extends React.Component{
             swapping: 0,
             greener: 0,
 
-            toggleState: true
+            toggleNext: true,
+            togglePrev: true,
+            togglePP: true,
+            toggleSort: false,
+            toggleNewArr: false,
+
+            toggleSliderCount: false,
+            toggleSliderDelay: false,
         });
         let arrayBars = document.getElementsByClassName('array-bar');
         for (let m = 0; m < arrayBars.length; m++) {
@@ -132,10 +146,18 @@ export default class SortingVisualizer extends React.Component{
 
             currentStep: 0,
 
-
             comparisons: 0,
             swapping: 0,
             greener: 0,
+
+            toggleSort: true,
+            toggleNewArr: false,
+            toggleNext: false,
+            togglePP: false,
+            togglePrev: false,
+
+            toggleSliderCount: true,
+            toggleSliderDelay: true,
         });
 
         let temp = 0;
@@ -185,6 +207,13 @@ export default class SortingVisualizer extends React.Component{
             }
             if (this.state.currentStep === this.state.arraySet.length - 1) {
                 arrayBars[0].style.backgroundColor = 'green';
+                this.setState({
+                    toggleNewArr: false,
+                    toggleSort: false,
+                    toggleNext: true,
+                    togglePP: true,
+                    togglePrev: false,
+                })
                 clearInterval(this.state.animeInterval);
             }
             this.setState({currentStep: this.state.currentStep + 1})
@@ -194,15 +223,31 @@ export default class SortingVisualizer extends React.Component{
     }
 
     Next() {
+        this.setState({
+            toggleNewArr: false,
+            toggleSort: true,
+            toggleNext: false,
+            togglePP: true,
+            togglePrev: false,
+        })
 
     }
 
     playPause() {
-        if (this.state.pp) {
-            this.setState({pp: false});
-        } else {
-            this.setState({pp: true})
+        clearInterval(this.state.animeInterval);
+        let arrayBars = document.getElementsByClassName('array-bar');
+        for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
+            arrayBars[m].style.backgroundColor = 'red';
         }
+        const [fBar, sBar] = this.state.colorCmp[this.state.currentStep - 1];
+        if (this.state.colorCmp[this.state.currentStep].length === 2) {
+            arrayBars[fBar].style.backgroundColor = 'yellow';
+            arrayBars[sBar].style.backgroundColor = 'yellow';
+        }
+        for (let m = arrayBars.length - 1; m >= arrayBars.length - this.state.greener; m--) {
+            arrayBars[m].style.backgroundColor = 'green';
+        }
+
     }
 
     Prev() {
@@ -210,18 +255,61 @@ export default class SortingVisualizer extends React.Component{
     }
 
     render() {
+        const delayer = (e, val) => {
+            console.warn(val)
+            this.setState({
+                delay: val
+            })
+        }
+        const sizer = (e, val) => {
+            console.warn(val)
+            this.setState({
+                count: val
+            })
+            this.resetArray()
+        }
         return (
             <div>
+                <h3>Number of Elements in the Array:</h3>
+                <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.count}</h1>
+                <Slider
+                    aria-label="Number of Elements"
+                    defaultValue={this.state.count}
+                    max={100}
+                    min={10}
+                    step={1}
+                    onChange={sizer}
+                    valueLabelDisplay={true}
+                    aria-setsize={10}
+                    disabled={this.state.toggleSliderCount}
+                />
+                <h3>Delay of Transitions:</h3>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {this.state.delay}ms</h1>
+                <Slider
+                    aria-label="Delay"
+                    defaultValue={this.state.delay}
+                    max={500}
+                    min={1}
+                    step={1}
+                    onChange={delayer}
+                    valueLabelDisplay={true}
+                    disabled={this.state.toggleSliderDelay}
+                />
                 <h3> {
                     this.state.array.map((value, index) =>
                         <div className="array-bar" key={index} style={{height: `${value * 3}px`}}>{value}</div>
                     )
                 }</h3>
-                <button className='multiBtn' onClick={() => this.resetArray()}>Generate New Array</button>
-                <button className='multiBtn' onClick={() => this.Bubble()}>Bubble Sort</button>
-                <button className='multiBtn' onClick={() => this.Merge()}>Merge Sort</button>
+                <button className='multiBtn' onClick={() => this.resetArray()}
+                        disabled={this.state.toggleNewArr}>Generate New Array
+                </button>
+                <button className='multiBtn' onClick={() => this.Bubble()} disabled={this.state.toggleSort}>Bubble
+                    Sort
+                </button>
+                <button className='multiBtn' onClick={() => this.Merge()} disabled={this.state.toggleSort}>Merge Sort
+                </button>
                 <button className='multiBtn' id='firstBtn' disabled={this.state.togglePrev}>(Previous)</button>
-                <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.toggleState}>PLaY /
+                <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.togglePP}>PLaY /
                     PAuSe
                 </button>
                 <button className='multiBtn' disabled={this.state.toggleNext}>(Next)</button>
