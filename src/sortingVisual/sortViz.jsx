@@ -152,9 +152,9 @@ export default class SortingVisualizer extends React.Component{
 
             toggleSort: true,
             toggleNewArr: false,
-            toggleNext: false,
+            toggleNext: true,
             togglePP: false,
-            togglePrev: false,
+            togglePrev: true,
 
             toggleSliderCount: true,
             toggleSliderDelay: true,
@@ -224,17 +224,61 @@ export default class SortingVisualizer extends React.Component{
 
     Next() {
         this.setState({
-            toggleNewArr: false,
+
+            currentStep: this.state.currentStep + 1,
+
+
             toggleSort: true,
+            toggleNewArr: false,
             toggleNext: false,
-            togglePP: true,
-            togglePrev: false,
-        })
+            togglePP: false,
+            togglePrev: true,
+
+            toggleSliderCount: true,
+            toggleSliderDelay: true,
+        });
+
+        let arrayBars = document.getElementsByClassName('array-bar');
+
+        for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
+            arrayBars[m].style.backgroundColor = 'red';
+        }
+        const [fBar, sBar] = this.state.colorCmp[this.state.currentStep];
+        if (this.state.colorCmp[this.state.currentStep].length === 2) {
+            arrayBars[fBar].style.backgroundColor = 'yellow';
+            arrayBars[sBar].style.backgroundColor = 'yellow';
+        }
+
+        if (this.state.arraySet[this.state.currentStep].length === this.state.count) {
+            this.setState({
+                array: this.state.arraySet[this.state.currentStep],
+                comparisons: this.state.comparisons + 1
+            });
+        } else {
+            arrayBars[this.state.arraySet[this.state.currentStep]].style.backgroundColor = 'green';
+            this.setState({greener: this.state.greener + 1});
+        }
+        if (this.state.currentStep === this.state.arraySet.length - 1) {
+            arrayBars[0].style.backgroundColor = 'green';
+            this.setState({
+                toggleNewArr: false,
+                toggleSort: false,
+                toggleNext: true,
+                togglePP: true,
+                togglePrev: false,
+            })
+        }
+
 
     }
 
     playPause() {
         clearInterval(this.state.animeInterval);
+
+        this.setState({
+            togglePrev: false,
+            toggleNext: false
+        })
         let arrayBars = document.getElementsByClassName('array-bar');
         for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
             arrayBars[m].style.backgroundColor = 'red';
@@ -247,6 +291,7 @@ export default class SortingVisualizer extends React.Component{
         for (let m = arrayBars.length - 1; m >= arrayBars.length - this.state.greener; m--) {
             arrayBars[m].style.backgroundColor = 'green';
         }
+
 
     }
 
@@ -312,7 +357,8 @@ export default class SortingVisualizer extends React.Component{
                 <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.togglePP}>PLaY /
                     PAuSe
                 </button>
-                <button className='multiBtn' disabled={this.state.toggleNext}>(Next)</button>
+                <button className='multiBtn' onClick={() => this.Next()} disabled={this.state.toggleNext}>(Next)
+                </button>
 
                 {/*<button onClick={() => this.checker()}*/}
                 <h1>Comparisons: {this.state.comparisons}   </h1>
