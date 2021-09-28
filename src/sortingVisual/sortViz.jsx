@@ -351,7 +351,6 @@ export default class SortingVisualizer extends React.Component{
                 </button>
                 <button className='multiBtn' onClick={() => this.Next()} disabled={this.state.toggleNext}>(Next)
                 </button>
-
                 {/*<button onClick={() => this.checker()}*/}
                 <h1>Comparisons: {this.state.comparisons}   </h1>
                 <h1>Swapping: {this.state.swapping}</h1>
