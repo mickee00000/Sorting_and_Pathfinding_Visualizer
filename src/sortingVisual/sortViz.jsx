@@ -227,7 +227,6 @@ export default class SortingVisualizer extends React.Component{
 
             currentStep: this.state.currentStep + 1,
 
-
             toggleSort: true,
             toggleNewArr: false,
             toggleNext: false,
