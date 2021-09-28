@@ -9,18 +9,23 @@ export default class SortingVisualizer extends React.Component{
             array: [],
             dummyArray: [],
 
-            steps: [],
+            arraySet: [],
             currentStep: 0,
+            colorCmp: [],
 
             count: 15,
             delay: 5,
 
-            pp: true,
             comparisons: 0,
             swapping: 0,
-            description: '',
+            greener: 0,
 
-            toggleState: true
+            description: '',
+            animeInterval: 0,
+
+            toggleNext: true,
+            togglePrev: true,
+            toggleState: false,
         };
     }
 
@@ -49,10 +54,15 @@ export default class SortingVisualizer extends React.Component{
 
         this.setState({
             array: array,
-            steps: [array],
+
+            arraySet: [],
+            colorCmp: [],
             currentStep: 0,
-            swapping: 0,
+
             comparisons: 0,
+            swapping: 0,
+            greener: 0,
+
             toggleState: true
         });
         let arrayBars = document.getElementsByClassName('array-bar');
@@ -119,28 +129,23 @@ export default class SortingVisualizer extends React.Component{
 
     Bubble() {
         this.setState({
-            swapping: 0,
-            comparisons: 0,
+
             currentStep: 0,
-            dummyArray: this.state.array,
-            steps: [],
-            toggleState: false
+
+
+            comparisons: 0,
+            swapping: 0,
+            greener: 0,
         });
 
-
         let temp = 0;
-        let a = 0;
         const arr = this.state.array.slice();
-        const arraySet = [];
-        const colorCmp = []
-
-
+        const arraySet = [], colorCmp = [];
         let arrayBars = document.getElementsByClassName('array-bar');
-
 
         for (let i = 0; i < arr.length - 1; i++) {
             for (let j = 0; j < arr.length - 1 - i; j++) {
-                a = a + 1;
+
                 if (arr[j] > arr[j + 1]) {
                     temp = arr[j];
                     arr[j] = arr[j + 1];
@@ -154,39 +159,42 @@ export default class SortingVisualizer extends React.Component{
             colorCmp.push([0].slice());
         }
 
-        a = 0
-        let b = 0, greener = 0;
-        for (let i = 0; i < arraySet.length; i++) {
-            a++;
-            setTimeout(() => {
-                for (let m = 0; m < arrayBars.length - greener; m++) {
-                    arrayBars[m].style.backgroundColor = 'red';
-                }
-                const [fBar, sBar] = colorCmp[b];
-                if (colorCmp[b].length === 2) {
-                    arrayBars[fBar].style.backgroundColor = 'yellow';
-                    arrayBars[sBar].style.backgroundColor = 'yellow';
-                }
+        this.setState({
+            arraySet: arraySet,
+            colorCmp: colorCmp
+        })
 
-                if (arraySet[b].length === this.state.count) {
-                    this.setState({array: arraySet[b], comparisons: this.state.comparisons + 1});
-                } else {
-                    arrayBars[arraySet[b]].style.backgroundColor = 'green';
-                    greener++;
-                }
-                b++;
-                if (i === arraySet.length - 1) {
-                    arrayBars[0].style.backgroundColor = 'green';
-                }
+        this.state.animeInterval = setInterval(() => {
+            for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
+                arrayBars[m].style.backgroundColor = 'red';
+            }
+            const [fBar, sBar] = this.state.colorCmp[this.state.currentStep];
+            if (this.state.colorCmp[this.state.currentStep].length === 2) {
+                arrayBars[fBar].style.backgroundColor = 'yellow';
+                arrayBars[sBar].style.backgroundColor = 'yellow';
+            }
+
+            if (this.state.arraySet[this.state.currentStep].length === this.state.count) {
+                this.setState({
+                    array: this.state.arraySet[this.state.currentStep],
+                    comparisons: this.state.comparisons + 1
+                });
+            } else {
+                arrayBars[this.state.arraySet[this.state.currentStep]].style.backgroundColor = 'green';
+                this.setState({greener: this.state.greener + 1});
+            }
+            if (this.state.currentStep === this.state.arraySet.length - 1) {
+                arrayBars[0].style.backgroundColor = 'green';
+                clearInterval(this.state.animeInterval);
+            }
+            this.setState({currentStep: this.state.currentStep + 1})
+        }, this.state.delay);
 
 
-                /*for(let n = arrayBars.length-1; n > arrayBars.length - 1 - i; n--){
-                    arrayBars[n].style.backgroundColor = 'green';
-                }*/
-            }, a * this.state.delay);
+    }
 
+    Next() {
 
-        }
     }
 
     playPause() {
@@ -195,6 +203,10 @@ export default class SortingVisualizer extends React.Component{
         } else {
             this.setState({pp: true})
         }
+    }
+
+    Prev() {
+
     }
 
     render() {
@@ -208,11 +220,11 @@ export default class SortingVisualizer extends React.Component{
                 <button className='multiBtn' onClick={() => this.resetArray()}>Generate New Array</button>
                 <button className='multiBtn' onClick={() => this.Bubble()}>Bubble Sort</button>
                 <button className='multiBtn' onClick={() => this.Merge()}>Merge Sort</button>
-                <button className='multiBtn' id='firstBtn' disabled={this.state.toggleState}>(Previous)</button>
+                <button className='multiBtn' id='firstBtn' disabled={this.state.togglePrev}>(Previous)</button>
                 <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.toggleState}>PLaY /
                     PAuSe
                 </button>
-                <button className='multiBtn' disabled={this.state.toggleState}>(Next)</button>
+                <button className='multiBtn' disabled={this.state.toggleNext}>(Next)</button>
 
                 {/*<button onClick={() => this.checker()}*/}
                 <h1>Comparisons: {this.state.comparisons}   </h1>
