@@ -1,3 +1,6 @@
+html{
+
+}
 .array-bar {
     width: 40px;
     margin: 5px;
@@ -13,10 +16,15 @@
     margin-left: 100px;
 }
 
-#delayer_slider {
-
+.upSlider-1{
+    display: inline-block;
+    float: left;
+    margin-left: 10px;
+    color: crimson;
 }
-
-#sizer_slider {
-
+.upSlider-2{
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    color: orange;
 }

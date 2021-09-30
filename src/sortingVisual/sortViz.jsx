@@ -14,8 +14,8 @@ export default class SortingVisualizer extends React.Component{
             currentStep: 0,
             colorCmp: [],
 
-            count: 15,
-            delay: 100,
+            count: 40,
+            delay: 50,
 
             comparisons: 0,
             swapping: 0,
@@ -23,6 +23,7 @@ export default class SortingVisualizer extends React.Component{
 
             description: '',
             animeInterval: 0,
+            playing: false,
 
             toggleNext: true,
             togglePrev: true,
@@ -32,6 +33,7 @@ export default class SortingVisualizer extends React.Component{
 
             toggleSliderCount: false,
             toggleSliderDelay: false,
+            toggleSliderPlayback: true,
 
         };
     }
@@ -127,7 +129,7 @@ export default class SortingVisualizer extends React.Component{
             }
 
         }
-
+////////////////////////Start of the Merge Sort
         this.setState({
             swapping: 0,
             comparisons: 0,
@@ -135,6 +137,7 @@ export default class SortingVisualizer extends React.Component{
 
         let arr = this.state.array;
         let arrayBars = document.getElementsByClassName('array-bar');
+
 
         mergeSort(arr);
 
@@ -149,6 +152,7 @@ export default class SortingVisualizer extends React.Component{
             comparisons: 0,
             swapping: 0,
             greener: 0,
+            playing: true,
 
             toggleSort: true,
             toggleNewArr: false,
@@ -158,6 +162,7 @@ export default class SortingVisualizer extends React.Component{
 
             toggleSliderCount: true,
             toggleSliderDelay: true,
+            toggleSliderPlayback: false,
 
             /* firstPrev: true*/
         });
@@ -174,7 +179,7 @@ export default class SortingVisualizer extends React.Component{
                     temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
-                    this.setState({swapping: this.state.swapping + 1});
+
                 }
                 arraySet.push(arr.slice());
                 colorCmp.push([j, j + 1].slice());
@@ -217,6 +222,7 @@ export default class SortingVisualizer extends React.Component{
         if (this.state.currentStep === this.state.arraySet.length - 1) {
             arrayBars[0].style.backgroundColor = 'green';
             this.setState({
+                comparisons: this.state.comparisons + 1,
                 toggleNewArr: false,
                 toggleSort: false,
                 toggleNext: true,
@@ -236,7 +242,7 @@ export default class SortingVisualizer extends React.Component{
             toggleNewArr: false,
             toggleNext: false,
             togglePP: false,
-            togglePrev: true,
+            togglePrev: false,
 
             toggleSliderCount: true,
             toggleSliderDelay: true,
@@ -246,25 +252,32 @@ export default class SortingVisualizer extends React.Component{
     }
 
     playPause() {
-        clearInterval(this.state.animeInterval);
-
-        this.setState({
-            togglePrev: false,
-            toggleNext: false
-        })
-        let arrayBars = document.getElementsByClassName('array-bar');
-        for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
-            arrayBars[m].style.backgroundColor = 'red';
+        if (this.state.playing) {
+            clearInterval(this.state.animeInterval);
+            this.setState({
+                togglePrev: false,
+                toggleNext: false,
+                playing: false
+            })
+            let arrayBars = document.getElementsByClassName('array-bar');
+            for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
+                arrayBars[m].style.backgroundColor = 'red';
+            }
+            const [fBar, sBar] = this.state.colorCmp[this.state.currentStep - 1];
+            if (this.state.colorCmp[this.state.currentStep].length === 2) {
+                arrayBars[fBar].style.backgroundColor = 'yellow';
+                arrayBars[sBar].style.backgroundColor = 'yellow';
+            }
+            for (let m = arrayBars.length - 1; m >= arrayBars.length - this.state.greener; m--) {
+                arrayBars[m].style.backgroundColor = 'green';
+            }
         }
-        const [fBar, sBar] = this.state.colorCmp[this.state.currentStep - 1];
-        if (this.state.colorCmp[this.state.currentStep].length === 2) {
-            arrayBars[fBar].style.backgroundColor = 'yellow';
-            arrayBars[sBar].style.backgroundColor = 'yellow';
+        else{
+            this.state.animeInterval = setInterval(() => {
+                this.BubbleColor();
+                this.setState({currentStep: this.state.currentStep + 1, playing: true})
+            }, this.state.delay);
         }
-        for (let m = arrayBars.length - 1; m >= arrayBars.length - this.state.greener; m--) {
-            arrayBars[m].style.backgroundColor = 'green';
-        }
-
 
     }
 
@@ -303,10 +316,22 @@ export default class SortingVisualizer extends React.Component{
             })
             this.resetArray()
         }
+        const playback = (e,val) => {
+            console.warn(val)
+            this.playPause();
+            this.setState({
+                currentStep: val,
+                playing: true
+            })
+        }
         return (
             <div>
-                <h3>Number of Elements in the Array:</h3>
-                <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{this.state.count}</h1>
+
+                <div style={{width: 1000 }} className={'upSlider-1'}>
+                    <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        Number of Elements in the Array:</h3>
+                    <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {this.state.count}</h1>
                 <Slider
                     aria-label="Number of Elements"
                     defaultValue={this.state.count}
@@ -318,23 +343,40 @@ export default class SortingVisualizer extends React.Component{
                     aria-setsize={10}
                     disabled={this.state.toggleSliderCount}
                 />
-                <h3>Delay of Transitions:</h3>
-                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {this.state.delay}ms</h1>
+                </div>
+                <div className={'upSlider-2'} style={{width:1000}}>
+
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delay of Transitions:</h3>
+                <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {this.state.delay}ms</h1>
                 <Slider
                     aria-label="Delay"
                     defaultValue={this.state.delay}
                     max={500}
-                    min={1}
-                    step={1}
+                    min={0}
+                    step={10}
                     onChange={delayer}
                     valueLabelDisplay={true}
                     disabled={this.state.toggleSliderDelay}
                 />
+                </div>
                 <h3> {
                     this.state.array.map((value, index) =>
                         <div className="array-bar" key={index} style={{height: `${value * 3}px`}}>{value}</div>
                     )
                 }</h3>
+                <div>
+                    <Slider
+                        value={this.state.currentStep}
+                        aria-label="Delay"
+                        defaultValue={this.state.currentStep}
+                        max={this.state.arraySet.length-1}
+                        min={0}
+                        step={1}
+                        onChange={playback}
+                        valueLabelDisplay={true}
+                        disabled={this.state.toggleSliderPlayback}
+                    />
+                </div>
                 <button className='multiBtn' onClick={() => this.resetArray()}
                         disabled={this.state.toggleNewArr}>Generate New Array
                 </button>
@@ -344,7 +386,7 @@ export default class SortingVisualizer extends React.Component{
                 <button className='multiBtn' onClick={() => this.Merge()} disabled={this.state.toggleSort}>Merge Sort
                 </button>
                 <button className='multiBtn' onClick={() => this.Prev()} id='firstBtn'
-                        disabled={this.state.togglePrev}>(Previous)
+                        disabled={this.state.togglePrev}>(Previous) *BUGGY
                 </button>
                 <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.togglePP}>PLaY /
                     PAuSe
@@ -352,8 +394,9 @@ export default class SortingVisualizer extends React.Component{
                 <button className='multiBtn' onClick={() => this.Next()} disabled={this.state.toggleNext}>(Next)
                 </button>
                 {/*<button onClick={() => this.checker()}*/}
+                <br/>
                 <h1>Comparisons: {this.state.comparisons}   </h1>
-                <h1>Swapping: {this.state.swapping}</h1>
+              {/*  <h1>Swapping: {this.state.swapping}</h1>*/}
 
             </div>
         );
