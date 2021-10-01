@@ -1,51 +1,71 @@
-import { array_bars, copyArray } from "./array";
-import { resetDelay, chosenBar, sortedBar, swapBar, unsortedBar } from "../animation";
+const insertionSort = ({ 
+  arrayStates, 
+  copyArray, 
+  changeArrayState, 
+  changeCompIndexes 
+}) => {
+  console.log('function called')
 
-const insertionSort = () => {
-  // reset dealy each time calling a sort algo because
-  // if it's value too high than we have to wait alot
-  resetDelay();
-
-  // copy array and creating dom object of array
-  let arr = copyArray();
-  
-  for(let i = 1; i < arr.length; i++){
-    // const arrBar1 = ;
-    chosenBar(array_bars[i], arr[i]);
-
-    console.log('after one second');
-    const temp = arr[i];
-    let j = i;
-    // let x = 0;
-    while(temp < arr[j-1] && j > 0){
-      swapBar(array_bars[j], arr[j]);
-      swapBar(array_bars[j-1], arr[j-1]);
-
-      arr[j] = arr[j-1];
-
-      swapBar(array_bars[j], arr[j]);
-      swapBar(array_bars[j-1], arr[j-1]);
-
-      // if(j-1 == i){
-      //   chosenBar(array_bars[j], arr[j]);
-      // }else{
-      //   sortedBar(array_bars[j], arr[j]);
-      // }
-      j--;
-      // x++;
-      // if(x > 20){break;}
+  let array = copyArray()
+  let arraySet = []
+  let compIndex = []
+  arraySet.push(array.slice())
+  compIndex.push([0, 0])
+  for(let i = 1; i < array.length; i++){
+    const temp = array[i]
+    arraySet.push(array.slice()) //new line
+    compIndex.push([i, -1].slice())       //new line
+    let j = i
+    while(temp < array[j-1] && j > 0){
+      array[j] = array[j-1]
+      arraySet.push(array.slice())
+      compIndex.push([j, j-1].slice())
+      j--
     }
-    arr[j] = temp;
-    for(let x = 0; x < i; x++){
-      sortedBar(array_bars[x], arr[x]);
-    }
+    array[j] = temp
+    arraySet.push(array.slice())
+    compIndex.push([j, -2])
   }
-  console.log('work finished');
-  for(let i = 0; i < arr.length; i++){
-    sortedBar(array_bars[i], arr[i]);
-    console.log(arr[i]);
-    console.log(array_bars[i]);
-  }
+  changeCompIndexes(compIndex)
+  changeArrayState(arraySet)
+  // console.log('print')
+  // for(let i = 0; i < arraySet.length; i++){
+  //   console.log(arraySet[i])
+  //   console.log(arrayStates[i]);
+  // }
+  console.log('finish', arrayStates.length);
 }
 
-export { insertionSort };
+const insertionVisual = ({
+  isPlay,
+  index,
+  cmpIndexes,
+  arrayStates,
+  setIndex,
+  delayInterval,
+  setIsPlay,
+  changeArray
+}) => {
+    setIsPlay(true);
+    const array_bars = document.getElementsByClassName('array-bar');
+    let delay = 0;
+    console.log(arrayStates.length)
+    for(let i = index+1; i < arrayStates.length; i++){
+      if(isPlay){
+        setTimeout(()=>{
+          setIndex(i)
+          changeArray(i)
+        }, delay += delayInterval)
+      }else{
+        break
+      }
+    }
+    // const array_bars = document.getElementsByClassName('array-bar')
+    for(let i = 0; i < array_bars.length; i++){  
+      setTimeout(()=>{
+        array_bars[i].style.backgroundColor = 'green'
+      }, delay+=delayInterval)
+    } 
+  }
+
+export { insertionSort, insertionVisual };
