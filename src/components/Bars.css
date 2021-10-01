@@ -1,0 +1,23 @@
+.listBlocks {
+    background-color: rgb(18, 72, 109);
+    margin: 0 auto;
+    min-height: 100%;
+    min-width: 100%;
+    text-align: center;
+  }
+  
+  .listBlocks > .block {
+    background-color: turquoise;
+    color: #852626;
+    display: inline-block;
+    box-sizing: border-box; 
+   /* border-radius: 10px;  */
+    font-size: 15px;
+    font-weight: bold;
+    margin: 2px 4px;
+    text-align: center;
+    transition-duration: 10ms;
+    transition-property: height;
+    /* transition-timing-function: ease-in; */
+  }
+  
