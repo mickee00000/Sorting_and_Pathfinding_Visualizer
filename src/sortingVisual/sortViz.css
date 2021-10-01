@@ -1,30 +1,10 @@
 html{
 
 }
+
 .array-bar {
     width: 40px;
     margin: 5px;
     background-color: red;
     display: inline-block;
-}
-
-.multiBtn {
-    margin-left: 2px;
-}
-
-#firstBtn {
-    margin-left: 100px;
-}
-
-.upSlider-1{
-    display: inline-block;
-    float: left;
-    margin-left: 10px;
-    color: crimson;
-}
-.upSlider-2{
-    display: inline-block;
-    float: right;
-    margin-right: 10px;
-    color: orange;
 }
