@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e212d58a-36a7-4554-a3e5-94e16015406b" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="merge_all_braches" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="ProjectId" id="1yReKOmO1Ftd1qhmOKfmcdBEhPi" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/sortingVisual/sortViz.jsx" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/sortingVisual/sortViz.jsx" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="showLigatures" value="false" />
+  </component>
+  <component name="RunManager" selected="npm.start">
+    <configuration name="Unnamed" type="JavascriptDebugType" nameIsGenerated="true" uri="http://localhost:3000/" useFirstLineBreakpoints="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="start" />
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Unnamed" />
+      <item itemvalue="npm.start" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e212d58a-36a7-4554-a3e5-94e16015406b" name="Changes" comment="" />
+      <created>1632218762451</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632218762451</updated>
+      <workItem from="1632218765232" duration="3296000" />
+      <workItem from="1632280720199" duration="3615000" />
+      <workItem from="1632481691264" duration="5752000" />
+      <workItem from="1632724612254" duration="10577000" />
+      <workItem from="1632735439797" duration="14711000" />
+      <workItem from="1632760725349" duration="495000" />
+      <workItem from="1632761593808" duration="5711000" />
+      <workItem from="1632800921441" duration="3826000" />
+      <workItem from="1632806166384" duration="9203000" />
+      <workItem from="1632897656686" duration="11186000" />
+      <workItem from="1632994665599" duration="221000" />
+      <workItem from="1633105169555" duration="351000" />
+      <workItem from="1633105541072" duration="112000" />
+      <workItem from="1633105670711" duration="268000" />
+      <workItem from="1633106070883" duration="577000" />
+    </task>
+    <task id="LOCAL-00001" summary="new self approch">
+      <created>1632219186820</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1632219186820</updated>
+    </task>
+    <task id="LOCAL-00002" summary="new self approch">
+      <created>1632562217527</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632562217527</updated>
+    </task>
+    <task id="LOCAL-00003" summary="new self approch">
+      <created>1632735291517</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1632735291517</updated>
+    </task>
+    <task id="LOCAL-00004" summary="working with built arraySteps           :) :) :)">
+      <created>1632748540500</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1632748540500</updated>
+    </task>
+    <task id="LOCAL-00005" summary="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort">
+      <created>1632806948373</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1632806948373</updated>
+    </task>
+    <task id="LOCAL-00006" summary="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; Two Sliders Working">
+      <created>1632811540387</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1632811540387</updated>
+    </task>
+    <task id="LOCAL-00007" summary="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; Two Sliders Working">
+      <created>1632812794637</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1632812794637</updated>
+    </task>
+    <task id="LOCAL-00008" summary="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; Two Sliders Working&#10;-&gt; Pause and Next Working Properly (w/o function)">
+      <created>1632812845604</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1632812845604</updated>
+    </task>
+    <task id="LOCAL-00009" summary="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; Two Sliders Working&#10;-&gt; Pause and Next Working Properly (w/o function)">
+      <created>1632814037664</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1632814037664</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Changelog:&#10;&#10;-&gt; Previous button works but still BUGGY on FIRST and LAST play.&#10;&#10;-&gt; Pause and Next Working Properly (with BubbleColor Function)&#10;-&gt; Pause and Next Working Properly (w/o function)&#10;-&gt; Two Sliders Working&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; working with built arraySteps    :) :) :)">
+      <created>1632814263288</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1632814263288</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Changelog:&#10;&#10;-&gt; Previous button works but still BUGGY on FIRST and LAST play.&#10;&#10;-&gt; Pause and Next Working Properly (with BubbleColor Function)&#10;-&gt; Pause and Next Working Properly (w/o function)&#10;-&gt; Two Sliders Working&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; working with built arraySteps    :) :) :)">
+      <created>1632994696405</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1632994696405</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Merge remote-tracking branch 'origin/bb' into bb&#10;&#10;# Conflicts:&#10;#&#9;src/App.js&#10;#&#9;src/index.js&#10;#&#9;src/sortingVisual/NavigationBar.js">
+      <created>1633106198231</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1633106198231</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="new self approch" />
+    <MESSAGE value="working with built arraySteps           :) :) :)" />
+    <MESSAGE value="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort" />
+    <MESSAGE value="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; Two Sliders Working" />
+    <MESSAGE value="working with built arraySteps           :) :) :)&#10;&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; Two Sliders Working&#10;-&gt; Pause and Next Working Properly (w/o function)" />
+    <MESSAGE value="Changelog:&#10;&#10;-&gt; Previous button works but still BUGGY on FIRST and LAST play.&#10;&#10;-&gt; Pause and Next Working Properly (with BubbleColor Function)&#10;-&gt; Pause and Next Working Properly (w/o function)&#10;-&gt; Two Sliders Working&#10;-&gt; Repeated Clicks to new array and Bubble Sort&#10;-&gt; working with built arraySteps    :) :) :)" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/bb' into bb&#10;&#10;# Conflicts:&#10;#&#9;src/App.js&#10;#&#9;src/index.js&#10;#&#9;src/sortingVisual/NavigationBar.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/bb' into bb&#10;&#10;# Conflicts:&#10;#&#9;src/App.js&#10;#&#9;src/index.js&#10;#&#9;src/sortingVisual/NavigationBar.js" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CS391$Unnamed.dat" NAME="Unnamed Coverage Results" MODIFIED="1632740048242" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="WipCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

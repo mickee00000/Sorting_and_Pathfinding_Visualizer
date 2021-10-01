@@ -1,0 +1,212 @@
+Index: src/sortingVisual/sortViz.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from \"react\";\r\nimport './sortViz.css';\r\n\r\nexport default class SortingVisualizer extends React.Component{\r\n    constructor(props) {\r\n        super(props);\r\n\r\n        this.state = {\r\n            array: [],\r\n            dummyArray: [],\r\n\r\n            steps: [],\r\n            currentStep: 0,\r\n\r\n            count: 15,\r\n            delay: 5,\r\n\r\n            pp: true,\r\n            comparisons: 0,\r\n            swapping: 0,\r\n            description: '',\r\n\r\n            toggleState: true\r\n        };\r\n    }\r\n\r\n    componentDidMount() {\r\n        this.resetArray();\r\n    }\r\n\r\n    /*\r\n        checker(){\r\n            const checkHelper = document.getElementsByClassName('array-bar');\r\n            checkHelper[4].style.backgroundColor = 'yellow';\r\n        }\r\n    */\r\n\r\n    resetArray() {\r\n        clearInterval(this.animeTimeout);\r\n        let array = [];\r\n        for (let i = 0; i < this.state.count; i++) {\r\n            array.push(Math.floor(Math.random() * (200 - 50) + 5));\r\n        }\r\n        let arrayBars1 = document.getElementsByClassName('array-bar');\r\n        for (let m = 0; m < arrayBars1.length; m++) {\r\n            arrayBars1[m].style.backgroundColor = 'red';\r\n        }\r\n\r\n\r\n        this.setState({\r\n            array: array,\r\n            steps: [array],\r\n            currentStep: 0,\r\n            swapping: 0,\r\n            comparisons: 0,\r\n            toggleState: true\r\n        });\r\n        let arrayBars = document.getElementsByClassName('array-bar');\r\n        for (let m = 0; m < arrayBars.length; m++) {\r\n            arrayBars[m].style.backgroundColor = 'red';\r\n        }\r\n\r\n\r\n    }\r\n\r\n    Merge() {\r\n\r\n        function mergeSort(array) {\r\n            console.log(\"Splitting: \", array)\r\n\r\n            if (array.length > 1) {\r\n                let middle = Math.ceil(array.length / 2);\r\n                let leftArr = array.slice(0, middle);\r\n                let rightArr = array.slice(middle, array.length);\r\n\r\n                mergeSort(leftArr);\r\n                mergeSort(rightArr);\r\n\r\n                let l = 0, r = 0, i = 0;\r\n\r\n                while (l < leftArr.length && r < rightArr.length) {\r\n                    if (leftArr[l] < rightArr[r]) {\r\n                        array[i] = leftArr[l];\r\n                        i++;\r\n                        l++;\r\n                    } else {\r\n                        array[i] = rightArr[r];\r\n                        i++;\r\n                        r++;\r\n                    }\r\n                }\r\n                while (l < leftArr.length) {\r\n                    array[i] = leftArr[l];\r\n                    i++;\r\n                    l++;\r\n                }\r\n                while (r < rightArr.length) {\r\n                    array[i] = rightArr[r];\r\n                    i++;\r\n                    r++;\r\n                }\r\n                console.log(\"Merging:   \", array)\r\n            }\r\n\r\n        }\r\n\r\n        this.setState({\r\n            swapping: 0,\r\n            comparisons: 0,\r\n        });\r\n\r\n        let arr = this.state.array;\r\n        let arrayBars = document.getElementsByClassName('array-bar');\r\n\r\n        mergeSort(arr);\r\n\r\n    }\r\n\r\n\r\n    Bubble() {\r\n        this.setState({\r\n            swapping: 0,\r\n            comparisons: 0,\r\n            currentStep: 0,\r\n            dummyArray: this.state.array,\r\n            steps: [],\r\n            toggleState: false\r\n        });\r\n\r\n\r\n        let temp = 0;\r\n        let a = 0;\r\n        const arr = this.state.array.slice();\r\n        const arraySet = [];\r\n        const colorCmp = []\r\n\r\n\r\n        let arrayBars = document.getElementsByClassName('array-bar');\r\n\r\n\r\n        for (let i = 0; i < arr.length - 1; i++) {\r\n            for (let j = 0; j < arr.length - 1 - i; j++) {\r\n                a = a + 1;\r\n                if (arr[j] > arr[j + 1]) {\r\n                    temp = arr[j];\r\n                    arr[j] = arr[j + 1];\r\n                    arr[j + 1] = temp;\r\n                    this.setState({swapping: this.state.swapping + 1});\r\n                }\r\n                arraySet.push(arr.slice());\r\n                colorCmp.push([j, j + 1].slice());\r\n            }\r\n            arraySet.push(arrayBars.length - 1 - i);\r\n            colorCmp.push([0].slice());\r\n        }\r\n\r\n        a = 0\r\n        let b = 0, greener = 0;\r\n        for (let i = 0; i < arraySet.length; i++) {\r\n            a++;\r\n            setTimeout(() => {\r\n                for (let m = 0; m < arrayBars.length - greener; m++) {\r\n                    arrayBars[m].style.backgroundColor = 'red';\r\n                }\r\n                const [fBar, sBar] = colorCmp[b];\r\n                if (colorCmp[b].length === 2) {\r\n                    arrayBars[fBar].style.backgroundColor = 'yellow';\r\n                    arrayBars[sBar].style.backgroundColor = 'yellow';\r\n                }\r\n\r\n                if (arraySet[b].length === this.state.count) {\r\n                    this.setState({array: arraySet[b], comparisons: this.state.comparisons + 1});\r\n                } else {\r\n                    arrayBars[arraySet[b]].style.backgroundColor = 'green';\r\n                    greener++;\r\n                }\r\n                b++;\r\n                if (i === arraySet.length - 1) {\r\n                    arrayBars[0].style.backgroundColor = 'green';\r\n                }\r\n\r\n\r\n                /*for(let n = arrayBars.length-1; n > arrayBars.length - 1 - i; n--){\r\n                    arrayBars[n].style.backgroundColor = 'green';\r\n                }*/\r\n            }, a * this.state.delay);\r\n\r\n\r\n        }\r\n    }\r\n\r\n    playPause() {\r\n        if (this.state.pp) {\r\n            this.setState({pp: false});\r\n        } else {\r\n            this.setState({pp: true})\r\n        }\r\n    }\r\n\r\n    render() {\r\n        return (\r\n            <div>\r\n                <h3> {\r\n                    this.state.array.map((value, index) =>\r\n                        <div className=\"array-bar\" key={index} style={{height: `${value * 3}px`}}>{value}</div>\r\n                    )\r\n                }</h3>\r\n                <button className='multiBtn' onClick={() => this.resetArray()}>Generate New Array</button>\r\n                <button className='multiBtn' onClick={() => this.Bubble()}>Bubble Sort</button>\r\n                <button className='multiBtn' onClick={() => this.Merge()}>Merge Sort</button>\r\n                <button className='multiBtn' id='firstBtn' disabled={this.state.toggleState}>(Previous)</button>\r\n                <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.toggleState}>PLaY /\r\n                    PAuSe\r\n                </button>\r\n                <button className='multiBtn' disabled={this.state.toggleState}>(Next)</button>\r\n\r\n                {/*<button onClick={() => this.checker()}*/}\r\n                <h1>Comparisons: {this.state.comparisons}   </h1>\r\n                <h1>Swapping: {this.state.swapping}</h1>\r\n\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\n
+===================================================================
+diff --git a/src/sortingVisual/sortViz.jsx b/src/sortingVisual/sortViz.jsx
+--- a/src/sortingVisual/sortViz.jsx	
++++ b/src/sortingVisual/sortViz.jsx	
+@@ -8,19 +8,25 @@
+         this.state = {
+             array: [],
+             dummyArray: [],
++            algo: '',
+ 
+-            steps: [],
++            arraySet: [],
++            colorCmp: [],
+             currentStep: 0,
++            playing: false,
++            greener:0,
+ 
+             count: 15,
+-            delay: 5,
++            delay: 100,
+ 
+             pp: true,
+             comparisons: 0,
+             swapping: 0,
+             description: '',
+ 
+-            toggleState: true
++            toggleState: true,
++            toggleSort: false,
++            animeInterval: 0
+         };
+     }
+ 
+@@ -36,7 +42,7 @@
+     */
+ 
+     resetArray() {
+-        clearInterval(this.animeTimeout);
++        clearInterval(this.state.animeInterval);
+         let array = [];
+         for (let i = 0; i < this.state.count; i++) {
+             array.push(Math.floor(Math.random() * (200 - 50) + 5));
+@@ -50,10 +56,12 @@
+         this.setState({
+             array: array,
+             steps: [array],
++            greener: 0,
+             currentStep: 0,
+             swapping: 0,
+             comparisons: 0,
+-            toggleState: true
++            toggleState: true,
++            toggleSort: false
+         });
+         let arrayBars = document.getElementsByClassName('array-bar');
+         for (let m = 0; m < arrayBars.length; m++) {
+@@ -124,15 +132,16 @@
+             currentStep: 0,
+             dummyArray: this.state.array,
+             steps: [],
+-            toggleState: false
++            toggleState: false,
++            toggleSort: true,
++            greener: 0,
+         });
+ 
+ 
+         let temp = 0;
+         let a = 0;
+         const arr = this.state.array.slice();
+-        const arraySet = [];
+-        const colorCmp = []
++
+ 
+ 
+         let arrayBars = document.getElementsByClassName('array-bar');
+@@ -147,54 +156,88 @@
+                     arr[j + 1] = temp;
+                     this.setState({swapping: this.state.swapping + 1});
+                 }
+-                arraySet.push(arr.slice());
+-                colorCmp.push([j, j + 1].slice());
++                this.state.arraySet.push(arr.slice());
++                this.state.colorCmp.push([j, j + 1].slice());
+             }
+-            arraySet.push(arrayBars.length - 1 - i);
+-            colorCmp.push([0].slice());
++            this.state.arraySet.push(arrayBars.length - 1 - i);
++            this.state.colorCmp.push([0].slice());
+         }
+ 
+         a = 0
+-        let b = 0, greener = 0;
+-        for (let i = 0; i < arraySet.length; i++) {
+-            a++;
+-            setTimeout(() => {
+-                for (let m = 0; m < arrayBars.length - greener; m++) {
++        let b = 0, i=0;
++
++            this.state.animeInterval = setInterval(() => {
++                this.setState({
++                    currentStep: b
++                })
++                for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
+                     arrayBars[m].style.backgroundColor = 'red';
+                 }
+-                const [fBar, sBar] = colorCmp[b];
+-                if (colorCmp[b].length === 2) {
++                const [fBar, sBar] = this.state.colorCmp[b];
++                if (this.state.colorCmp[b].length === 2) {
+                     arrayBars[fBar].style.backgroundColor = 'yellow';
+                     arrayBars[sBar].style.backgroundColor = 'yellow';
+                 }
+ 
+-                if (arraySet[b].length === this.state.count) {
+-                    this.setState({array: arraySet[b], comparisons: this.state.comparisons + 1});
++                if (this.state.arraySet[b].length === this.state.count) {
++                    this.setState({array: this.state.arraySet[b], comparisons: this.state.comparisons + 1});
+                 } else {
+-                    arrayBars[arraySet[b]].style.backgroundColor = 'green';
+-                    greener++;
++                    arrayBars[this.state.arraySet[b]].style.backgroundColor = 'green';
++                    this.setState({greener: this.state.greener + 1})
+                 }
+                 b++;
+-                if (i === arraySet.length - 1) {
++                if (i === this.state.arraySet.length - 1) {
+                     arrayBars[0].style.backgroundColor = 'green';
++                    clearInterval(this.state.animeInterval);
++                    this.setState({playing: false, toggleSort: false, toggleState: true})
+                 }
+-
++                i++;
+ 
+-                /*for(let n = arrayBars.length-1; n > arrayBars.length - 1 - i; n--){
+-                    arrayBars[n].style.backgroundColor = 'green';
+-                }*/
+-            }, a * this.state.delay);
++            }, this.state.delay);
+ 
+ 
+-        }
+     }
+ 
+     playPause() {
+-        if (this.state.pp) {
+-            this.setState({pp: false});
++        clearInterval(this.state.animeInterval);
++        this.setState({playing: false})
++    }
++
++    Next(){
++        clearInterval(this.state.animeInterval);
++        this.setState({playing: false , currentStep: this.state.currentStep + 1})
++        let arrayBars = document.getElementsByClassName('array-bar');
++        for (let m = 0; m < arrayBars.length - this.state.greener; m++) {
++            arrayBars[m].style.backgroundColor = 'red';
++        }
++        for (let m = arrayBars.length - 1; m > arrayBars.length - 1 - this.state.greener; m--){
++            arrayBars[m].style.backgroundColor = 'green';
++        }
++        const [fBar, sBar] = this.state.colorCmp[this.state.currentStep];
++        if (this.state.colorCmp[this.state.currentStep].length === 2) {
++            arrayBars[fBar].style.backgroundColor = 'yellow';
++            arrayBars[sBar].style.backgroundColor = 'yellow';
++        }
++
++        if (this.state.arraySet[this.state.currentStep].length === this.state.count) {
++            this.setState({array: this.state.arraySet[this.state.currentStep], comparisons: this.state.comparisons + 1});
+         } else {
+-            this.setState({pp: true})
++            arrayBars[this.state.arraySet[this.state.currentStep]].style.backgroundColor = 'green';
++            this.setState({greener: this.state.greener + 1})
+         }
++        if (this.state.currentStep === this.state.arraySet.length - 1){
++            this.setState({
++                toggleState: true,
++                greener: this.state.currentStep,
++            });
++            arrayBars[0].style.backgroundColor = 'green';
++            arrayBars[1].style.backgroundColor = 'green';
++            this.setState({
++                currentStep: this.state.arraySet,
++                greener: this.state.currentStep,
++            });
++        }
++
+     }
+ 
+     render() {
+@@ -206,13 +249,11 @@
+                     )
+                 }</h3>
+                 <button className='multiBtn' onClick={() => this.resetArray()}>Generate New Array</button>
+-                <button className='multiBtn' onClick={() => this.Bubble()}>Bubble Sort</button>
+-                <button className='multiBtn' onClick={() => this.Merge()}>Merge Sort</button>
++                <button className='multiBtn' disabled={this.state.toggleSort} onClick={() => this.Bubble()}>Bubble Sort</button>
++                <button className='multiBtn' disabled={this.state.toggleSort} onClick={() => this.Merge()}>Merge Sort</button>
+                 <button className='multiBtn' id='firstBtn' disabled={this.state.toggleState}>(Previous)</button>
+-                <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.toggleState}>PLaY /
+-                    PAuSe
+-                </button>
+-                <button className='multiBtn' disabled={this.state.toggleState}>(Next)</button>
++                <button className='multiBtn' onClick={() => this.playPause()} disabled={this.state.toggleState}>PLaY / PAuSe</button>
++                <button className='multiBtn' onClick={() => this.Next()} disabled={this.state.toggleState}>(Next)</button>
+ 
+                 {/*<button onClick={() => this.checker()}*/}
+                 <h1>Comparisons: {this.state.comparisons}   </h1>
