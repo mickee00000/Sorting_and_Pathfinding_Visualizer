@@ -91,16 +91,16 @@ export default class SortingVisualizer extends React.Component{
 
     Merge() {
 
-        function mergeSort(array) {
+        function mergeSort(array, startIdx, endIdx, dummyArr) {
             console.log("Splitting: ", array)
 
             if (array.length > 1) {
-                let middle = Math.ceil(array.length / 2);
-                let leftArr = array.slice(0, middle);
-                let rightArr = array.slice(middle, array.length);
+                let middle = Math.floor(arr.length/ 2);
+                let leftArr = array.slice(0, middle+1);
+                let rightArr = array.slice(middle+1, array.length);
 
-                mergeSort(leftArr);
-                mergeSort(rightArr);
+                mergeSort(leftArr, startIdx, middle,dummyArr);
+                mergeSort(rightArr, middle+1, endIdx, dummyArr);
 
                 let l = 0, r = 0, i = 0;
 
@@ -135,11 +135,11 @@ export default class SortingVisualizer extends React.Component{
             comparisons: 0,
         });
 
-        let arr = this.state.array;
+        let arr = this.state.array.slice();
         let arrayBars = document.getElementsByClassName('array-bar');
+        let dummy = arr.slice();
 
-
-        mergeSort(arr);
+        mergeSort(arr, 0 , arr, dummy);
 
     }
 
@@ -161,7 +161,7 @@ export default class SortingVisualizer extends React.Component{
             togglePrev: true,
 
             toggleSliderCount: true,
-            toggleSliderDelay: true,
+            toggleSliderDelay: false,
             toggleSliderPlayback: false,
 
             /* firstPrev: true*/
@@ -228,6 +228,7 @@ export default class SortingVisualizer extends React.Component{
                 toggleNext: true,
                 togglePP: true,
                 togglePrev: false,
+                toggleSliderDelay: true,
             })
             clearInterval(this.state.animeInterval);
         }
@@ -308,6 +309,11 @@ export default class SortingVisualizer extends React.Component{
             this.setState({
                 delay: val
             })
+            clearInterval(this.state.animeInterval);
+            this.state.animeInterval = setInterval(() => {
+                this.BubbleColor();
+                this.setState({currentStep: this.state.currentStep + 1, playing: true})
+            }, this.state.delay);
         }
         const sizer = (e, val) => {
             console.warn(val)
