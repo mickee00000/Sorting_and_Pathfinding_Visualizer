@@ -1,13 +1,13 @@
-import './App.css';
-import SortingVisualizer from './sortingVisual/ArrayChart';
-import NavigationBar from './sortingVisual/NavigationBar';
+import './App.css'
 
+import { ArrayChart } from './components/ArrayChart'
+import { ArrayHandler } from './components/ArrayHandler'
 
 function App() {
   return (
     <div className="App">
-      <NavigationBar></NavigationBar>
-      <SortingVisualizer></SortingVisualizer>
+      <ArrayChart/>
+      <ArrayHandler/>
     </div>
   );
 }

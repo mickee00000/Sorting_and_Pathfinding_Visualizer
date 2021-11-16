@@ -1,0 +1,23 @@
+.array-box {
+  /* display: absolute; */
+  margin: 0.1rem;
+  justify-items: center;
+  border: 2px solid black;
+}
+
+.array-bar {
+  /* width: 0.8rem; */
+  font-weight: bold;
+  color: black;
+  font-size: 0.5rem;
+  display: inline-block;
+  background-color: red;
+  margin: 0 2.5px;
+}
+.upper-nav {
+  height: 5vh;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: bisque;
+}

@@ -1,0 +1,143 @@
+/* ============ArrayHandler Navigation styles============== */
+
+nav {
+  position: fixed;
+  bottom: 0;
+  background-color: rgb(224, 155, 4);
+  border: 2px solid rgb(109, 79, 14);
+  display: flex;
+  justify-content: space-between;
+  right: 0;
+  left: 0;
+}
+
+/* ===============Graph container style================= */
+.graph-container {
+  border: 5px solid rgb(41, 21, 24);
+  display: inline-block;
+  vertical-align: top;
+  height: 40vh;
+  width: 50%;
+}
+.graph-btn {
+  width: 100px;
+}
+.responsive-container {
+  /* position: relative; */
+  /* width: 10px; */
+  /* height: 5px; */
+  background-color: red;
+}
+
+.line-chart {
+  margin: 10px 0px;
+  max-height: 300px;
+  /* background-color: rgb(65, 35, 65); */
+  background-color: black;
+  color: #fdfafa;
+}
+.line-chart-container {
+  max-height: 20vh;
+  bottom: 0;
+}
+
+/* =============Array controller button styles============ */
+.array-btns {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  border: 5px solid rgb(41, 21, 24);
+  height: 40vh;
+}
+
+.comm-design-btn {
+  width: 100%;
+}
+
+.btn {
+  width: 98%;
+  color: whitesmoke;
+  margin: 1px 2px;
+  font-size: 0.9rem;
+  background-color: rgb(82, 85, 85);
+  border: 0px solid transparent;
+  text-shadow: 2px 2px 2px #635656;
+  box-shadow: 2px 2px 2px rgb(65, 35, 65);
+}
+.btn:hover {
+  background-color: rgb(103, 112, 112);
+}
+
+.group {
+  margin: 5px 10px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.range-input {
+  width: 100%;
+}
+
+.pp {
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid black; */
+}
+
+.icon-btn {
+  margin: 2px 7px;
+  background-color: rgb(82, 85, 85);
+  border: 0px solid transparent;
+  text-shadow: 2px 2px 2px #fdfafa;
+  box-shadow: 2px 2px 2px rgb(65, 35, 65);
+}
+.icon {
+  color: rgb(235, 240, 233);
+  font-size: 1rem;
+}
+.icon-btn:hover {
+  background-color: rgb(103, 112, 112);
+}
+
+.select-algo {
+  /* width: 90%; */
+  margin: 1.2rem;
+}
+.select {
+  width: 100%;
+  background-color: rgb(125, 131, 131);
+  /* color: whitesmoke; */
+  /* border: 2px solid black; */
+  padding: 1px 4px;
+  border-radius: 10px;
+}
+.select:hover {
+  background-color: rgb(103, 112, 112);
+}
+
+.user-array-form {
+  width: 100%;
+}
+
+.user-array {
+  width: 65%;
+}
+.submit-btn {
+  width: 31%;
+  color: whitesmoke;
+  margin: 2px;
+  font-size: 0.9rem;
+  background-color: rgb(82, 85, 85);
+  border: 0px solid transparent;
+  text-shadow: 2px 2px 2px #635656;
+  box-shadow: 2px 2px 2px rgb(65, 35, 65);
+}
+.submit-btn:hover {
+  background-color: rgb(103, 112, 112);
+}
+
+.user-array {
+  border-radius: 5px;
+  text-shadow: 2px 2px 2px #ad9b9b;
+  box-shadow: 2px 2px 2px rgb(65, 35, 65);
+}
